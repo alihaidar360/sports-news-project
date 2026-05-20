@@ -1,7 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
 import { sanityClient, urlFor } from "./sanity";
 
-export type SportRef = { name: string; slug: string };
+export type SportRef = { name: string; slug: string};
 export type Sport = { _id: string; name: string; slug: string; order?: number };
 
 export type SanityImage = { asset?: { _ref: string } } | null | undefined;
@@ -9,6 +9,7 @@ export type SanityImage = { asset?: { _ref: string } } | null | undefined;
 export interface Article {
   _id: string;
   title: string;
+  slug: string;
   excerpt?: string;
   image?: SanityImage;
   imageUrl?: string;
@@ -65,7 +66,16 @@ const sportsQuery = `*[_type=="sportCategory"]|order(coalesce(order, 999) asc){_
 
 const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.current==$slug)]
   | order(coalesce(trendingRank, 999) asc, publishedAt desc)[0...10]{
-    _id, title, excerpt, image, imageUrl, featured, publishedAt, trendingRank, ${sportProj}
+    _id,
+    title,
+    slug,
+    excerpt,
+    image,
+    imageUrl,
+    featured,
+    publishedAt,
+    trendingRank,
+    ${sportProj}
   }`;
 
 const tweetsQuery = `*[_type=="tweet" && ($slug=="all" || sport->slug.current==$slug)]

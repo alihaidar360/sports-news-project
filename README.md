@@ -1,3 +1,4 @@
+HEAD
 # TheSportsNewsLive — Setup Guide
 
 ## 1. Install Dependencies
@@ -154,3 +155,4 @@ Add this to your `index.html` `<head>`:
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 ```
+

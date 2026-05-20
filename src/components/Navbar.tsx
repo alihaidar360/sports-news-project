@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Search, Menu, X, Moon, Sun } from "lucide-react";
 import { sportsQueryOptions, type Sport } from "../lib/sanity.queries";
@@ -10,6 +10,7 @@ const ALL: Sport = { _id: "all", name: "All Sports", slug: "all" };
 
 export default function Navbar() {
   const { sport, setSport } = useSportFilter();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
   const { data } = useQuery(sportsQueryOptions());
@@ -30,9 +31,16 @@ export default function Navbar() {
   };
 
   const pick = (s: string) => {
-    setSport(s);
-    setOpen(false);
-  };
+  setSport(s);
+
+  if (s === "all") {
+    navigate("/");
+  } else {
+    navigate(`/${s}`);
+  }
+
+  setOpen(false);
+};
 
   return (
     <header className="sticky top-0 z-40 nav-blur border-b border-border">
