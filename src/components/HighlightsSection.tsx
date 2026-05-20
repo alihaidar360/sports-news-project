@@ -5,9 +5,20 @@ import { useSportFilter } from "../context/SportFilter";
 import { highlightsQueryOptions } from "../lib/sanity.queries";
 import { SectionHeader, EmptyState } from "./TrendingNews";
 
+function formatDate(date?: string) {
+  if (!date) return "";
+
+  return new Date(date).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 export default function HighlightsSection() {
   const { sport } = useSportFilter();
   const { data, isLoading } = useQuery(highlightsQueryOptions(sport));
+
   const list = data ?? [];
   const [active, setActive] = useState<string | null>(null);
 
@@ -34,26 +45,38 @@ export default function HighlightsSection() {
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition flex items-center justify-center">
                   <span className="h-14 w-14 rounded-full bg-white/95 text-black flex items-center justify-center shadow-lg group-hover:scale-110 transition">
                     <Play className="h-6 w-6 ml-0.5 fill-current" />
                   </span>
                 </div>
+
                 <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider text-white bg-black/60 backdrop-blur px-2 py-1 rounded">
                   {h.sport?.name ?? "Sports"}
                 </span>
               </div>
+
               <div className="p-5">
-                <h3 className="font-display font-bold text-base leading-snug">{h.title}</h3>
+                <h3 className="font-display font-bold text-base leading-snug">
+                  {h.title}
+                </h3>
+
                 {h.description && (
                   <p className="mt-1.5 text-sm text-muted-foreground line-clamp-2">
                     {h.description}
                   </p>
                 )}
-                {h.date && <div className="mt-3 text-xs text-muted-foreground">{h.date}</div>}
+
+                {h.date && (
+                  <div className="mt-3 text-xs text-muted-foreground">
+                    Uploaded {formatDate(h.date)}
+                  </div>
+                )}
               </div>
             </button>
           ))}
+
           {!isLoading && list.length === 0 && <EmptyState />}
         </div>
       </div>
@@ -76,6 +99,7 @@ export default function HighlightsSection() {
             >
               Close <X className="h-4 w-4" />
             </button>
+
             <iframe
               src={`https://www.youtube.com/embed/${active}?autoplay=1`}
               title="Match highlights"
