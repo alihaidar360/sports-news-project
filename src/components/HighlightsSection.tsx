@@ -18,7 +18,13 @@ function formatDate(date?: string) {
 function relativeTime(date?: string) {
   if (!date) return "";
 
-  return formatDistanceToNow(new Date(date), {
+  const parsedDate = new Date(date);
+
+  if (isNaN(parsedDate.getTime())) {
+    return "";
+  }
+
+  return formatDistanceToNow(parsedDate, {
     addSuffix: true,
   });
 }
