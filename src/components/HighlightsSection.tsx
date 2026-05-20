@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Play, X } from "lucide-react";
+import { formatDistanceToNow } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { useSportFilter } from "../context/SportFilter";
 import { highlightsQueryOptions } from "../lib/sanity.queries";
@@ -12,6 +13,13 @@ function formatDate(date?: string) {
     day: "numeric",
     month: "short",
     year: "numeric",
+  });
+}
+function relativeTime(date?: string) {
+  if (!date) return "";
+
+  return formatDistanceToNow(new Date(date), {
+    addSuffix: true,
   });
 }
 
@@ -68,10 +76,10 @@ export default function HighlightsSection() {
                   </p>
                 )}
 
-                {h.date && (
-                  <div className="mt-3 text-xs text-muted-foreground">
-                    Uploaded {formatDate(h.date)}
-                  </div>
+               {h.date && (
+                <div className="mt-3 text-xs text-muted-foreground">
+                  Uploaded {relativeTime(h.date)}
+                </div>
                 )}
               </div>
             </button>
