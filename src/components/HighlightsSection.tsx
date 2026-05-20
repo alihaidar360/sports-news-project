@@ -84,7 +84,7 @@ export default function HighlightsSection() {
 
                {h.date && (
                 <div className="mt-3 text-xs text-muted-foreground">
-                  Uploaded {relativeTime(h.date)}
+                  {relativeTime(h.date)}
                 </div>
                 )}
               </div>
