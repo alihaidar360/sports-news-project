@@ -1,21 +1,18 @@
+import { Tweet } from "react-tweet";
 import { useQuery } from "@tanstack/react-query";
 import { useSportFilter } from "../context/SportFilter";
 import { tweetsQueryOptions } from "../lib/sanity.queries";
 import { SectionHeader, EmptyState } from "./TrendingNews";
 
-function getTweetEmbedUrl(url: string | undefined) {
+function getTweetId(url: string | undefined): string | null {
   if (!url) return null;
-
-  return `https://twitframe.com/show?url=${encodeURIComponent(url)}`;
+  const match = url.match(/status\/(\d+)/);
+  return match ? match[1] : null;
 }
 
 export default function TweetsSection() {
   const { sport } = useSportFilter();
-
-  const { data, isLoading } = useQuery(
-    tweetsQueryOptions(sport)
-  );
-
+  const { data, isLoading } = useQuery(tweetsQueryOptions(sport));
   const list = data ?? [];
 
   return (
@@ -28,23 +25,11 @@ export default function TweetsSection() {
 
       <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {list.map((tweet) => {
-          const embedUrl = getTweetEmbedUrl(tweet.url);
-
+          const tweetId = getTweetId(tweet.url);
           return (
-            <div
-              key={tweet._id}
-              className="rounded-2xl overflow-hidden border border-border bg-card hover:border-foreground/20 transition bg-white"
-            >
-              {embedUrl ? (
-                <iframe
-                  src={embedUrl}
-                  width="100%"
-                  height="600"
-                  frameBorder="0"
-                  scrolling="no"
-                  className="w-full"
-                  title="Embedded Tweet"
-                />
+            <div key={tweet._id} className="flex justify-center">
+              {tweetId ? (
+                <Tweet id={tweetId} />
               ) : (
                 <div className="p-5 text-sm text-muted-foreground">
                   Tweet not available
@@ -53,7 +38,6 @@ export default function TweetsSection() {
             </div>
           );
         })}
-
         {!isLoading && list.length === 0 && <EmptyState />}
       </div>
     </section>
