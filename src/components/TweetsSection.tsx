@@ -1,20 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { Tweet } from "react-tweet";
 import { useSportFilter } from "../context/SportFilter";
 import { tweetsQueryOptions } from "../lib/sanity.queries";
 import { SectionHeader, EmptyState } from "./TrendingNews";
 
-type TweetItem = {
-  _id: string;
-  url?: string;
-};
-
-function extractTweetId(url?: string) {
+function getTweetEmbedUrl(url: string | undefined) {
   if (!url) return null;
 
-  const match = url.match(/status\/(\d+)/);
-
-  return match ? match[1] : null;
+  return `https://twitframe.com/show?url=${encodeURIComponent(url)}`;
 }
 
 export default function TweetsSection() {
@@ -24,7 +16,7 @@ export default function TweetsSection() {
     tweetsQueryOptions(sport)
   );
 
-  const list: TweetItem[] = data ?? [];
+  const list = data ?? [];
 
   return (
     <section className="container-wide mt-24">
@@ -36,15 +28,23 @@ export default function TweetsSection() {
 
       <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {list.map((tweet) => {
-          const tweetId = extractTweetId(tweet.url);
+          const embedUrl = getTweetEmbedUrl(tweet.url);
 
           return (
             <div
               key={tweet._id}
-              className="rounded-2xl overflow-hidden border border-border bg-card hover:border-foreground/20 transition"
+              className="rounded-2xl overflow-hidden border border-border bg-card hover:border-foreground/20 transition bg-white"
             >
-              {tweetId ? (
-                <Tweet id={tweetId} />
+              {embedUrl ? (
+                <iframe
+                  src={embedUrl}
+                  width="100%"
+                  height="600"
+                  frameBorder="0"
+                  scrolling="no"
+                  className="w-full"
+                  title="Embedded Tweet"
+                />
               ) : (
                 <div className="p-5 text-sm text-muted-foreground">
                   Tweet not available
