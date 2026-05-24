@@ -253,23 +253,9 @@ const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.curren
 
 // 🔥 FIXED QUERY (MAIN FIX HERE)
 const tweetsQuery = `*[_type=="tweet" && ($slug=="all" || sport->slug.current==$slug)]
-  | order(publishedAt desc)[0...12]{
+  | order(_createdAt desc)[0...12]{
     _id,
-    author,
-    handle,
-    verified,
-    avatar,
-    avatarUrl,
-    content,
-    time,
-    likes,
-    replies,
-    reposts,
     url,
-
-    // ✅ extract tweet ID from URL
-    "tweetId": url match "*/status/*" ? string(split(url, "/")[length(split(url, "/")) - 1]) : null,
-
     ${sportProj}
   }`;
 
