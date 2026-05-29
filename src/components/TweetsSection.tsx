@@ -58,7 +58,7 @@ export default function TweetsSection() {
   return (
     <section className="container-wide mt-24">
       <SectionHeader
-        eyebrow="Live on X"
+        eyebrow="Loading..."
         title="What people are posting"
         sub="Real embedded posts — likes, replies and reposts update automatically."
       />
