@@ -77,7 +77,7 @@ export default function TweetsSection() {
               data-dnt="true"
               data-theme="light"
             >
-              <a href={t.url}>View on X</a>
+              <a href={t.url}>Loading...</a>
             </blockquote>
           </div>
         ))}
