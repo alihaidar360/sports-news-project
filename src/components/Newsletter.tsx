@@ -16,7 +16,7 @@ export default function Newsletter() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/subscribe/",
+        "https://sports-news-backend-nnl3.onrender.com/api/subscribe",
         {
           method: "POST",
           headers: {
