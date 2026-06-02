@@ -16,7 +16,7 @@ export default function Newsletter() {
 
     try {
       const response = await fetch(
-        "https://sports-news-backend-nnl3.onrender.com/api/subscribe",
+        "https://sports-news-backend-nnl3.onrender.com/api/subscribe/",
         {
           method: "POST",
           headers: {
