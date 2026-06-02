@@ -239,7 +239,6 @@ const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.curren
   publishedAt,
   trendingRank,
   ${sportProj}
-}
   }`;
 
 const tweetsQuery = `*[_type=="tweet" && ($slug=="all" || sport->slug.current==$slug)]
