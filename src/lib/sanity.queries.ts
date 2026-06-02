@@ -229,7 +229,17 @@ const sportsQuery = `*[_type=="sportCategory"]|order(coalesce(order, 999) asc){_
 
 const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.current==$slug)]
   | order(coalesce(trendingRank, 999) asc, publishedAt desc)[0...10]{
-    _id, title, slug, excerpt, image, imageUrl, featured, publishedAt, trendingRank, ${sportProj}
+  _id,
+  title,
+  "slug": slug.current,
+  excerpt,
+  image,
+  imageUrl,
+  featured,
+  publishedAt,
+  trendingRank,
+  ${sportProj}
+}
   }`;
 
 const tweetsQuery = `*[_type=="tweet" && ($slug=="all" || sport->slug.current==$slug)]
