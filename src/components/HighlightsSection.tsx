@@ -3,7 +3,10 @@ import { Play, X } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { useSportFilter } from "../context/SportFilter";
-import { highlightsQueryOptions } from "../lib/sanity.queries";
+import {
+  highlightsQueryOptions,
+  highlightThumbnail,
+} from "../lib/sanity.queries";
 import { SectionHeader, EmptyState } from "./TrendingNews";
 
 function relativeTime(date?: string) {
@@ -41,7 +44,7 @@ export default function HighlightsSection() {
 
           {list.map((h) => {
 
-            const thumbnail = `https://img.youtube.com/vi/${h.youtubeId}/hqdefault.jpg`;
+           const thumbnail = highlightThumbnail(h);
 
             return (
               <button
@@ -113,14 +116,14 @@ export default function HighlightsSection() {
             </button>
 
             {/* Uploaded Video */}
-            {active.uploadedVideo?.asset?.url ? (
-              <video
-                src={active.uploadedVideo.asset.url}
-                controls
-                autoPlay
-                className="h-full w-full"
-              />
-            ) : (
+            {active.videoFileUrl ? (
+             <video
+               src={active.videoFileUrl}
+               controls
+               autoPlay
+               className="h-full w-full"
+             />
+             ) : (
               // YouTube Embed
               <iframe
                 src={`https://www.youtube.com/embed/${active.youtubeId}?autoplay=1`}
