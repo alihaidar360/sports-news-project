@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import EditorialPage from "./EditorialPage";
 
 const TOPICS = [
@@ -14,6 +14,7 @@ export default function ContactPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // Loading state
 
   return (
     <EditorialPage
@@ -25,33 +26,51 @@ export default function ContactPage() {
         <h2 className="text-2xl font-bold tracking-tight">Send us a message</h2>
         <form
           className="mt-5 grid gap-4"
-         onSubmit={async (e) => {
-         e.preventDefault();
+          onSubmit={async (e) => {
+            e.preventDefault();
+            setIsSubmitting(true); // Button ko loading par daal dein
 
-        await fetch("https://sports-news-backend-nnl3.onrender.com/api/contact/", {
-         method: "POST",
-         headers: {
-        "Content-Type": "application/json",
-        },
-          body: JSON.stringify({
-          name,
-          email,
-          topic,
-          message,
-    }),
-  });
+            try {
+              const response = await fetch("https://sports-news-backend-nnl3.onrender.com/api/contact/", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  name,
+                  email,
+                  topic,
+                  message,
+                }),
+              });
 
-  alert("Message sent successfully!");
-}}
+              if (response.ok) {
+                alert("Message sent successfully! 🎉");
+                // Form ko reset karein
+                setName("");
+                setEmail("");
+                setMessage("");
+                setTopic("editorial");
+              } else {
+                alert("Something went wrong on the server. Please try again.");
+              }
+            } catch (error) {
+              console.error("Network Error:", error);
+              alert("Network error! Please check if your backend is running.");
+            } finally {
+              setIsSubmitting(false); // Loading khatam
+            }
+          }}
         >
           <div className="grid sm:grid-cols-2 gap-4">
             <label className="block">
               <span className="text-sm font-medium">Your name</span>
               <input
                 required
+                disabled={isSubmitting}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1.5 w-full h-11 px-3 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                className="mt-1.5 w-full h-11 px-3 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
               />
             </label>
             <label className="block">
@@ -59,9 +78,10 @@ export default function ContactPage() {
               <input
                 required
                 type="email"
+                disabled={isSubmitting}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1.5 w-full h-11 px-3 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                className="mt-1.5 w-full h-11 px-3 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
               />
             </label>
           </div>
@@ -69,8 +89,9 @@ export default function ContactPage() {
             <span className="text-sm font-medium">Topic</span>
             <select
               value={topic}
+              disabled={isSubmitting}
               onChange={(e) => setTopic(e.target.value)}
-              className="mt-1.5 w-full h-11 px-3 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+              className="mt-1.5 w-full h-11 px-3 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
             >
               {TOPICS.map((t) => (
                 <option key={t.value} value={t.value}>{t.label}</option>
@@ -82,23 +103,26 @@ export default function ContactPage() {
             <textarea
               required
               rows={6}
+              disabled={isSubmitting}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="mt-1.5 w-full px-3 py-2 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+              className="mt-1.5 w-full px-3 py-2 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
             />
           </label>
           <button
             type="submit"
-            className="inline-flex items-center justify-center h-11 px-5 rounded-md bg-foreground text-background text-sm font-semibold hover:opacity-90 transition w-fit"
+            disabled={isSubmitting}
+            className="inline-flex items-center justify-center h-11 px-5 rounded-md bg-foreground text-background text-sm font-semibold hover:opacity-90 transition w-fit disabled:opacity-50 cursor-pointer"
           >
-            Send message
+            {isSubmitting ? "Sending..." : "Send message"}
           </button>
           <p className="text-xs text-muted-foreground">
-            Submitting opens your email client pre-filled with the correct PITCH desk.
+            Submitting saves your message directly to our dashboard.
           </p>
         </form>
       </section>
 
+      {/* Direct Contacts Section */}
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Direct contacts</h2>
         <dl className="mt-4 grid sm:grid-cols-2 gap-4 text-sm">
@@ -115,6 +139,7 @@ export default function ContactPage() {
         </dl>
       </section>
 
+      {/* Response Times Section */}
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Response times</h2>
         <ul className="mt-3 list-disc pl-5 space-y-1.5">
