@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
-import EditorialPage, { breadcrumbJsonLd } from "./EditorialPage";
+import EditorialPage from "./EditorialPage";
 
 const TOPICS = [
   { value: "editorial", label: "Editorial tip / news story", email: "editorial@pitch.example" },
@@ -16,13 +15,6 @@ export default function ContactPage() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const mailto = useMemo(() => {
-    const t = TOPICS.find((x) => x.value === topic) ?? TOPICS[0];
-    const subject = encodeURIComponent(`[${t.label}] from ${name || "PITCH reader"}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
-    return `mailto:${t.email}?subject=${subject}&body=${body}`;
-  }, [topic, name, email, message]);
-
   return (
     <EditorialPage
       eyebrow="Contact"
@@ -33,10 +25,24 @@ export default function ContactPage() {
         <h2 className="text-2xl font-bold tracking-tight">Send us a message</h2>
         <form
           className="mt-5 grid gap-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            window.location.href = mailto;
-          }}
+         onSubmit={async (e) => {
+         e.preventDefault();
+
+        await fetch("http://127.0.0.1:8000/contact/", {
+         method: "POST",
+         headers: {
+        "Content-Type": "application/json",
+        },
+          body: JSON.stringify({
+          name,
+          email,
+          topic,
+          message,
+    }),
+  });
+
+  alert("Message sent successfully!");
+}}
         >
           <div className="grid sm:grid-cols-2 gap-4">
             <label className="block">

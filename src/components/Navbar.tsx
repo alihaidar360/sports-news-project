@@ -48,9 +48,9 @@ export default function Navbar() {
         <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => setSport("all")}>
           <span className="inline-block h-2 w-2 rounded-full bg-accent" />
           <span className="font-display text-lg font-extrabold tracking-tight">PITCH</span>
-          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden sm:inline">
+          {/* <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden sm:inline">
             / sports
-          </span>
+          </span> */}
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 mx-auto">
