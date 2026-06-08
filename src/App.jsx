@@ -4,7 +4,6 @@ import {
   Route,
   useParams,
 } from "react-router-dom";
-
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import TrendingNews from "./components/TrendingNews";
@@ -13,10 +12,15 @@ import TweetsSection from "./components/TweetsSection";
 import UpcomingMatches from "./components/UpcomingMatches";
 import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
-
 import ArticlePage from "./pages/ArticlePage";
-
 import { useSportFilter } from "./context/SportFilter";
+
+import EditorialPolicyPage from "./components/EditorialPolicyPage";
+import PrivacyPage from "./components/PrivacyPage";
+import ContactPage from "./components/ContactPage";
+import AdvertisePage from "./components/AdvertisePage";
+import EditorialPage from "./components/EditorialPage";
+import AboutPage from "./components/AboutPage";
 
 import "./index.css";
 
@@ -52,24 +56,33 @@ function SportPage() {
 const App = () => {
   return (
     <Routes>
-      {/* Homepage */}
-      <Route
-        path="/"
-        element={<HomePage />}
-      />
+  {/* Homepage */}
+  <Route path="/" element={<HomePage />} />
 
-      {/* Sport pages */}
-      <Route
-        path="/:sport"
-        element={<SportPage />}
-      />
+  {/* Sport pages */}
+  <Route path="/:sport" element={<SportPage />} />
 
-      {/* Article pages */}
-      <Route
-        path="/:sport/:slug"
-        element={<ArticlePage />}
-      />
-    </Routes>
+  {/* Article pages */}
+  <Route path="/:sport/:slug" element={<ArticlePage />} />
+
+
+
+      {/* 1. Homepage — Sabse pehle */}
+      <Route path="/" element={<HomePage />} />
+
+      {/* 2. Static Pages — Inhe hamesha dynamic params se UPAR hona chahiye */}
+      <Route path="/privacy" element={<PrivacyPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/advertise" element={<AdvertisePage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/editorial-policy" element={<EditorialPolicyPage />} /> 
+
+      {/* 3. Dynamic Pages — Yeh sabse NEECHE aayenge taake pehle static pages check ho sakein */}
+      <Route path="/:sport" element={<SportPage />} />
+      <Route path="/:sport/:slug" element={<ArticlePage />} />
+   
+</Routes>
+
   );
 };
 

@@ -1,20 +1,38 @@
+// src/components/Footer.tsx
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
-    <footer className="border-t border-border mt-24">
-      <div className="container-wide py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div className="flex items-center gap-2">
-          <span className="inline-block h-2 w-2 rounded-full bg-accent" />
-          <span className="font-display font-extrabold tracking-tight">PITCH</span>
-          <span className="text-xs text-muted-foreground ml-2">
+    <footer className="w-full bg-black border-t border-white/10">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-5 md:flex-row">
+        {/* Left: Brand + tagline */}
+        <div className="flex items-center gap-3 text-sm">
+          <span className="inline-flex items-center gap-2 font-extrabold tracking-wider text-white">
+            <span className="h-2 w-2 rounded-full bg-red-500" />
+            PITCH
+          </span>
+          <span className="text-white/60">
             © {new Date().getFullYear()} — Fast sports, no noise.
           </span>
         </div>
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <a href="#" className="hover:text-foreground transition">About</a>
-          <a href="#" className="hover:text-foreground transition">Editorial</a>
-          <a href="#" className="hover:text-foreground transition">Advertise</a>
-          <a href="#" className="hover:text-foreground transition">Privacy</a>
-          <a href="#" className="hover:text-foreground transition">Contact</a>
+
+        {/* Right: Page links */}
+        <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+          <Link to="/about" className="text-white/80 hover:text-white transition-colors">
+            About
+          </Link>
+          <Link to="/editorial-policy" className="text-white/80 hover:text-white transition-colors">
+            Editorial
+          </Link>
+          <Link to="/advertise" className="text-white/80 hover:text-white transition-colors">
+            Advertise
+          </Link>
+          <Link to="/privacy" className="text-white/80 hover:text-white transition-colors">
+            Privacy
+          </Link>
+          <Link to="/contact" className="text-white/80 hover:text-white transition-colors">
+            Contact
+          </Link>
         </nav>
       </div>
     </footer>
