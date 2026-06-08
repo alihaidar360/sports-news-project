@@ -28,7 +28,7 @@ export default function ContactPage() {
          onSubmit={async (e) => {
          e.preventDefault();
 
-        await fetch("http://127.0.0.1:8000/contact/", {
+        await fetch("https://sports-news-backend-nnl3.onrender.com/api/contact/", {
          method: "POST",
          headers: {
         "Content-Type": "application/json",
