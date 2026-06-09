@@ -4,8 +4,8 @@ export default function EditorialPolicyPage() {
   return (
     <EditorialPage
       eyebrow="Editorial Policy"
-      title="How PITCH reports, verifies and corrects sports news"
-      lede="Sports journalism is only useful when it is accurate. This is the editorial standard every PITCH writer and editor operates under, every day."
+      title="How PZMIR reports, verifies and corrects sports news"
+      lede="Sports journalism is only useful when it is accurate. This is the editorial standard every PZMIR writer and editor operates under, every day."
       updated="June 4, 2026"
     >
       <section>
@@ -48,8 +48,8 @@ export default function EditorialPolicyPage() {
         </p>
         <p className="mt-3">
           To request a correction, email{" "}
-          <a href="mailto:corrections@pitch.example" className="text-accent underline-offset-4 hover:underline">
-            corrections@pitch.example
+          <a href="mailto:pzmirsports@gmail.com" className="text-accent underline-offset-4 hover:underline">
+              pzmirsports@gmail.com
           </a>{" "}
           or use our <a href="/contact" className="text-accent underline-offset-4 hover:underline">contact form</a>.
         </p>
@@ -58,7 +58,7 @@ export default function EditorialPolicyPage() {
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Editorial independence</h2>
         <p className="mt-3">
-          PITCH's editorial team is structurally separate from our commercial team.
+          PZMIR's editorial team is structurally separate from our commercial team.
           Advertisers, sponsors and partners do not see articles before publication,
           do not influence what we cover, and cannot kill stories. Sponsored content
           is always clearly labelled as such.
@@ -78,7 +78,7 @@ export default function EditorialPolicyPage() {
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Ethical reporting guidelines</h2>
         <p className="mt-3">
-          PITCH journalists do not accept gifts, hospitality or paid travel that could
+          PZMIR journalists do not accept gifts, hospitality or paid travel that could
           compromise their independence. We protect the privacy of minors, treat
           athletes' mental health with care, and report on personal matters only when
           there is a clear public-interest justification.
