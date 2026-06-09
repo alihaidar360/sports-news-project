@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex items-center gap-3 text-sm">
           <span className="inline-flex items-center gap-2 font-extrabold tracking-wider text-white">
             <span className="h-2 w-2 rounded-full bg-red-500" />
-            PITCH
+            PZMIR
           </span>
           <span className="text-white/60">
             © {new Date().getFullYear()} — Fast sports, no noise.

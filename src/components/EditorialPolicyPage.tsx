@@ -11,7 +11,7 @@ export default function EditorialPolicyPage() {
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Fact-checking standards</h2>
         <p className="mt-3">
-          Every story on PITCH is fact-checked by a second editor before publication.
+          Every story on PZMIR is fact-checked by a second editor before publication.
           Statistics are verified against primary sources — official league data,
           governing-body releases and on-the-record interviews — not aggregator sites.
           Quotes are checked against original audio or video wherever possible.

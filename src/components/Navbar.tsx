@@ -47,10 +47,10 @@ export default function Navbar() {
       <div className="container-wide flex h-16 items-center gap-6">
         <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => setSport("all")}>
           <span className="inline-block h-2 w-2 rounded-full bg-accent" />
-          <span className="font-display text-lg font-extrabold tracking-tight">PITCH</span>
-          {/* <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden sm:inline">
+          <span className="font-display text-lg font-extrabold tracking-tight">PZMIR</span>
+          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden sm:inline">
             / sports
-          </span> */}
+          </span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 mx-auto">
@@ -79,7 +79,6 @@ export default function Navbar() {
             aria-label="Search"
             className="h-9 w-9 inline-flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition"
           >
-            <Search className="h-4 w-4" />
           </button>
           <button
             aria-label="Toggle theme"

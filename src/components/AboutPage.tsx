@@ -7,14 +7,15 @@ export default function AboutPage() {
     <EditorialPage
       eyebrow="About"
       title="A reader-first sports newsroom built for speed and trust"
-      lede="PITCH is an independent sports media publication covering breaking sports news, live match updates, video highlights and long-form analysis across every major sport in the world."
+      lede="PZMIR is an independent sports media publication covering breaking sports news, live match updates, video highlights 
+      and long-form analysis across every major sport in the world."
     >
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Our mission</h2>
         <p className="mt-3">
           We believe sports fans deserve a single, fast, trustworthy place to follow the
           stories that matter — without ads that get in the way, clickbait headlines or
-          recycled wire copy. PITCH exists to deliver clear, well-sourced sports
+          recycled wire copy. PZMIR exists to deliver clear, well-sourced sports
           journalism the moment news breaks.
         </p>
       </section>
@@ -22,7 +23,7 @@ export default function AboutPage() {
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Why readers trust us</h2>
         <p className="mt-3">
-          Every story published on PITCH is reviewed by a human editor before it goes
+          Every story published on PZMIR is reviewed by a human editor before it goes
           live. We name our sources, link to primary documents whenever possible, and
           publish visible corrections when we get something wrong. Our editorial team
           operates independently from our commercial team.
@@ -54,7 +55,7 @@ export default function AboutPage() {
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Editorial standards</h2>
         <p className="mt-3">
-          PITCH follows a clear set of editorial standards covering accuracy, fairness
+          PZMIR follows a clear set of editorial standards covering accuracy, fairness
           and independence. Read the full{" "}
           <a href="/editorial-policy" className="text-accent underline-offset-4 hover:underline">
             editorial policy
@@ -77,7 +78,7 @@ export default function AboutPage() {
         <p className="mt-3">
           Our editors operate across time zones so that live sports updates, match
           reports and breaking sports news are published within minutes of an event.
-          PITCH covers competitions on every continent, in every major league.
+          PZMIR covers competitions on every continent, in every major league.
         </p>
       </section>
 
@@ -85,7 +86,7 @@ export default function AboutPage() {
         <h2 className="text-2xl font-bold tracking-tight">Reader-first journalism</h2>
         <p className="mt-3">
           We don't sell your data, we don't write for the algorithm, and we don't pad
-          articles to hit a word count. Every story on PITCH is written for the reader
+          articles to hit a word count. Every story on PZMIR is written for the reader
           first. If you ever feel we've fallen short of that, please{" "}
           <a href="/contact" className="text-accent underline-offset-4 hover:underline">
             contact us

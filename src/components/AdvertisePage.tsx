@@ -9,12 +9,12 @@ export default function AdvertisePage() {
     <EditorialPage
       eyebrow="Advertise"
       title="Reach a global, high-intent sports audience"
-      lede="PITCH puts your brand in front of fans who actively follow breaking sports news, match highlights and live updates across every major sport."
+      lede="PZMIR puts your brand in front of fans who actively follow breaking sports news, match highlights and live updates across every major sport."
     >
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Our audience</h2>
         <p className="mt-3">
-          PITCH readers are passionate, mobile-first sports fans who come to us for
+          PZMIR readers are passionate, mobile-first sports fans who come to us for
           fast, accurate coverage of football, cricket, basketball, tennis, MMA,
           Formula 1, WWE and esports. They read multiple stories per session, return
           daily during live events, and engage heavily with video highlights.
