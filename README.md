@@ -89,7 +89,7 @@ add your domain to the CORS origins in Sanity:
 
 - Go to https://sanity.io/manage → Your Project → API → CORS Origins
 - Add: `http://localhost:5173` (dev)
-- Add: `https://yourdomain.com` (production)
+- Add: `https://sports-news-project.vercel.app` (production)
 
 ## 7. Production Build
 

@@ -6,7 +6,7 @@ export default function PrivacyPage() {
     <EditorialPage
       eyebrow="Privacy"
       title="Privacy policy"
-      lede="This policy explains what data PITCH collects when you read, subscribe or interact with our site — and the choices you have about that data."
+      lede="This policy explains what data PZMIR collects when you read, subscribe or interact with our site — and the choices you have about that data."
       updated="June 4, 2026"
     >
       <section>
@@ -52,17 +52,7 @@ export default function PrivacyPage() {
           PZMIR may show advertising served by third-party networks, including Google
           AdSense. These networks may use cookies or device identifiers to serve ads
           based on your visit to this and other websites. You can opt out of
-          personalised advertising via your Google account settings, or via the
-          ad-industry opt-out pages at{" "}
-          <a
-            href="https://www.aboutads.info/choices/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent underline-offset-4 hover:underline"
-          >
-            aboutads.info/choices
-          </a>
-          .
+          personalised advertising via your Google account settings.
         </p>
       </section>
 

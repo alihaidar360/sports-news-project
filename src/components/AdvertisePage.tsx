@@ -91,8 +91,8 @@ export default function AdvertisePage() {
         <h2 className="text-xl font-bold tracking-tight">Talk to our commercial team</h2>
         <p className="mt-2 text-muted-foreground">
           Email{" "}
-          <a href="mailto:advertise@pitch.example" className="text-accent underline-offset-4 hover:underline">
-            advertise@pitch.example
+          <a href="mailto:pzmirsports@gmail.com" className="text-accent underline-offset-4 hover:underline">
+             pzmirsports@gmail.com
           </a>{" "}
           with your campaign goals, timing and target markets. We respond to advertiser
           enquiries within two business days.

@@ -2,11 +2,11 @@ import { useMemo, useState } from "react";
 import EditorialPage from "./EditorialPage";
 
 const TOPICS = [
-  { value: "editorial", label: "Editorial tip / news story", email: "editorial@pitch.example" },
-  { value: "corrections", label: "Correction request", email: "corrections@pitch.example" },
-  { value: "advertise", label: "Advertising inquiry", email: "advertise@pitch.example" },
-  { value: "partnerships", label: "Business partnership", email: "partnerships@pitch.example" },
-  { value: "support", label: "General support", email: "hello@pitch.example" },
+  { value: "editorial", label: "Editorial tip / news story", email: "pzmirsports@gmail.com" },
+  { value: "corrections", label: "Correction request", email: "pzmirsports@gmail.com" },
+  { value: "advertise", label: "Advertising inquiry", email: "pzmirsports@gmail.com" },
+  { value: "partnerships", label: "Business partnership", email: "pzmirsports@gmail.com" },
+  { value: "support", label: "General support", email: "pzmirsports@gmail.com" },
 ];
 
 export default function ContactPage() {
