@@ -50,7 +50,8 @@
     <loc>https://sports-news-project.vercel.app/newsletter</loc>
     <priority>0.7</priority>
   </url>
-  <url>
+
+ <url>
   <loc>https://sports-news-project.vercel.app/about</loc>
 </url>
 
@@ -94,8 +95,10 @@
   <loc>
    https://sports-news-project.vercel.app/football/u17-euro-2026-semi-finals-belgium-france-italy-spain-results
   </loc>
+  </url>
   <url>
     <loc>
      https://sports-news-project.vercel.app/cricket/pakistan-vs-australia-2026-odi-series-2-1
     </loc>
+    </url>
 </urlset>
