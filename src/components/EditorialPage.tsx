@@ -68,7 +68,7 @@ export default function EditorialPage({ eyebrow, title, lede, updated, children 
               Quick links
             </h2>
             <ul className="mt-3 space-y-2 text-sm">
-              <li><Link to="/about" className="hover:text-accent transition">About PITCH</Link></li>
+              <li><Link to="/about" className="hover:text-accent transition">About PZMIR</Link></li>
               <li><Link to="/editorial-policy" className="hover:text-accent transition">Editorial policy</Link></li>
               <li><Link to="/advertise" className="hover:text-accent transition">Advertise with us</Link></li>
               <li><Link to="/privacy" className="hover:text-accent transition">Privacy policy</Link></li>

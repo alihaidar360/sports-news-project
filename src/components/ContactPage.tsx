@@ -25,7 +25,7 @@ export default function ContactPage() {
   return (
     <EditorialPage
       eyebrow="Contact"
-      title="Get in touch with the PITCH team"
+      title="Get in touch with the PZMIR team"
       lede="Whether you have a tip on a breaking sports story, a correction, an advertising brief or a partnership idea — we'd love to hear from you."
     >
       <section>
@@ -63,12 +63,17 @@ export default function ContactPage() {
     setTopic("editorial");
     setMessage("");
   } catch (error) {
-    console.error(error);
-    alert("Failed to send message");
+  console.error("FULL ERROR:", error);
+
+  if (error instanceof Error) {
+    alert(error.message);
+  } else {
+    alert("Unknown error");
   }
+}
 }}
-        >
-          <div className="grid sm:grid-cols-2 gap-4">
+   >          
+    <div className="grid sm:grid-cols-2 gap-4">
             <label className="block">
               <span className="text-sm font-medium">Your name</span>
               <input
