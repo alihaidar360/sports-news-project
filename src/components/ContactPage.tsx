@@ -9,7 +9,7 @@ const TOPICS = [
   { value: "support", label: "General support", email: "pzmirsports@gmail.com" },
 ];
 
-function ContactPage() {
+export default function ContactPage() {
   const [topic, setTopic] = useState("editorial");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
