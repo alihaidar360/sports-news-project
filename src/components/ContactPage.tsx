@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import EditorialPage from "./EditorialPage";
+import  EditorialPage from "../components//EditorialPage";
 
 const TOPICS = [
   { value: "editorial", label: "Editorial tip / news story", email: "pzmirsports@gmail.com" },
@@ -9,39 +9,63 @@ const TOPICS = [
   { value: "support", label: "General support", email: "pzmirsports@gmail.com" },
 ];
 
-export default function ContactPage() {
+function ContactPage() {
   const [topic, setTopic] = useState("editorial");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  const mailto = useMemo(() => {
+    const t = TOPICS.find((x) => x.value === topic) ?? TOPICS[0];
+    const subject = encodeURIComponent(`[${t.label}] from ${name || "PITCH reader"}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
+    return `mailto:${t.email}?subject=${subject}&body=${body}`;
+  }, [topic, name, email, message]);
+
   return (
     <EditorialPage
       eyebrow="Contact"
-      title="Get in touch with the PZMIR team"
+      title="Get in touch with the PITCH team"
       lede="Whether you have a tip on a breaking sports story, a correction, an advertising brief or a partnership idea — we'd love to hear from you."
     >
       <section>
         <h2 className="text-2xl font-bold tracking-tight">Send us a message</h2>
         <form
           className="mt-5 grid gap-4"
-         onSubmit={async (e) => {
-         e.preventDefault();
+          onSubmit={async (e) => {
+  e.preventDefault();
 
-        await fetch("https://sports-news-backend-nnl3.onrender.com/api/contact/", {
-         method: "POST",
-         headers: {
-        "Content-Type": "application/json",
+  try {
+    const response = await fetch(
+      "https://sports-news-backend-nnl3.onrender.com/api/contact/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-          body: JSON.stringify({
+        body: JSON.stringify({
           name,
           email,
           topic,
           message,
-    }),
-  });
+        }),
+      }
+    );
 
-  alert("Message sent successfully!");
+    if (!response.ok) {
+      throw new Error("Failed to send message");
+    }
+
+    alert("Message sent successfully!");
+
+    setName("");
+    setEmail("");
+    setTopic("editorial");
+    setMessage("");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to send message");
+  }
 }}
         >
           <div className="grid sm:grid-cols-2 gap-4">
