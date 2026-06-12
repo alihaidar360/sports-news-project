@@ -50,5 +50,52 @@
     <loc>https://sports-news-project.vercel.app/newsletter</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+  <loc>https://sports-news-project.vercel.app/about</loc>
+</url>
 
+<url>
+  <loc>https://sports-news-project.vercel.app/contact</loc>
+</url>
+
+<url>
+  <loc>https://sports-news-project.vercel.app/advertise</loc>
+</url>
+
+<url>
+  <loc>https://sports-news-project.vercel.app/privacy</loc>
+</url>
+
+<url>
+  <loc>https://sports-news-project.vercel.app/terms-and-conditions</loc>
+</url>
+
+<url>
+  <loc>https://sports-news-project.vercel.app/disclaimer</loc>
+</url>
+
+<url>
+  <loc>https://sports-news-project.vercel.app/editorial-policy</loc>
+</url>
+
+
+<url>
+  <loc>
+   https://sports-news-project.vercel.app/cricket/what-is-powerplay-in-cricket-rules
+  </loc>
+</url>
+
+<url>
+  <loc>
+    https://sports-news-project.vercel.app/f1/2026-monaco-grand-prix-kimi-antonelli-wins-chaotic-race
+  </loc>
+</url>
+<url>
+  <loc>
+   https://sports-news-project.vercel.app/football/u17-euro-2026-semi-finals-belgium-france-italy-spain-results
+  </loc>
+  <url>
+    <loc>
+     https://sports-news-project.vercel.app/cricket/pakistan-vs-australia-2026-odi-series-2-1
+    </loc>
 </urlset>
