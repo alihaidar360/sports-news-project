@@ -21,6 +21,8 @@ import ContactPage from "./components/ContactPage";
 import AdvertisePage from "./components/AdvertisePage";
 import EditorialPage from "./components/EditorialPage";
 import AboutPage from "./components/AboutPage";
+import DisclaimerPage from "./components/DisclaimerPage";
+import TermsPage from "./components/Terms-and-conditionPage";
 
 import "./index.css";
 
@@ -76,11 +78,14 @@ const App = () => {
       <Route path="/advertise" element={<AdvertisePage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/editorial-policy" element={<EditorialPolicyPage />} /> 
-
+      <Route path="/disclaimer" element={<DisclaimerPage />} />
+      <Route path="/terms-and-conditions" element={<TermsPage />} />
+      
       {/* 3. Dynamic Pages — Yeh sabse NEECHE aayenge taake pehle static pages check ho sakein */}
       <Route path="/:sport" element={<SportPage />} />
       <Route path="/:sport/:slug" element={<ArticlePage />} />
-   
+      
+      
 </Routes>
 
   );

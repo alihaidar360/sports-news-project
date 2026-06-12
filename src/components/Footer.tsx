@@ -32,6 +32,12 @@ export default function Footer() {
           </Link>
           <Link to="/contact" className="text-white/80 hover:text-white transition-colors">
             Contact
+          </Link> 
+          <Link to="/disclaimer" className="text-white/80 hover:text-white transition-colors">
+            Disclaimer
+          </Link>
+           <Link to="/terms-and-conditions" className="text-white/80 hover:text-white transition-colors">
+            Terms & Conditions
           </Link>
         </nav>
       </div>
