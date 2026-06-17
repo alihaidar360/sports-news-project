@@ -47,9 +47,11 @@ function MatchRow({ match }: { match: Match }) {
       </div>
 
       <div className="md:col-span-5 flex items-center gap-4">
-        <Team logo={teamLogo(match.team1Logo, match.team1LogoUrl)} name={match.team1} />
+       <Team logo={teamLogo(match.team1Logo)} name={match.team1} />
+
         <span className="text-sm font-semibold text-muted-foreground px-2">vs</span>
-        <Team logo={teamLogo(match.team2Logo, match.team2LogoUrl)} name={match.team2} />
+         <Team logo={teamLogo(match.team2Logo)} name={match.team2} />
+       
       </div>
 
       <div className="md:col-span-3 text-sm text-muted-foreground space-y-1">

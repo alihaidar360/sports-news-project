@@ -9,51 +9,6 @@ import {
 } from "../lib/sanity.queries";
 import { SectionHeader, EmptyState } from "./TrendingNews";
 
-function VideoPreview({ url }: { url?: string }) {
-  if (!url) return null;
-
-  const ytMatch = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|v\/)|youtu\.be\/)([A-Za-z0-9_-]{6,15})/,
-  );
-  const ytId = ytMatch?.[1];
-
-  if (!ytId) {
-    return (
-      <a
-        href={url}
-        target="_blank"
-        rel="noreferrer"
-        className="mt-3 block rounded-2xl border border-border bg-black/5 px-4 py-3 text-sm text-muted-foreground hover:bg-black/10 transition"
-      >
-        Open video
-      </a>
-    );
-  }
-
-  return (
-    <a
-      href={`https://www.youtube.com/watch?v=${ytId}`}
-      target="_blank"
-      rel="noreferrer"
-      className="mt-3 group block overflow-hidden rounded-2xl border border-border bg-black/5"
-    >
-      <div className="relative aspect-video">
-        <img
-          src={`https://img.youtube.com/vi/${ytId}/hqdefault.jpg`}
-          alt="Tweet video preview"
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-black/15 flex items-center justify-center">
-          <div className="h-14 w-14 rounded-full bg-white/90 shadow-lg grid place-items-center">
-            <div className="ml-1 h-0 w-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-sky-500" />
-          </div>
-        </div>
-      </div>
-    </a>
-  );
-}
-
 function TweetCard({ t }: { t: any }) {
   const avatar = tweetAvatar(t.avatar);
   const image = tweetImage(t.image);
@@ -94,7 +49,7 @@ function TweetCard({ t }: { t: any }) {
         </div>
       ) : null}
 
-      <VideoPreview url={t.videoUrl} />
+    
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
         <div>
