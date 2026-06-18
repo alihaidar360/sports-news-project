@@ -17,7 +17,7 @@ const articleQuery = `
   excerpt,
   content,
   image,
-  imageUrl,
+  trendingRank,
   publishedAt,
   "sport": sport->{name, "slug": slug.current}
 }
