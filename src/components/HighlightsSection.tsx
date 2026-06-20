@@ -66,9 +66,17 @@ export default function HighlightsSection() {
                     </span>
                   </div>
 
-                  <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider text-white bg-black/60 backdrop-blur px-2 py-1 rounded">
-                    {h.sport?.name ?? "Sports"}
-                  </span>
+                 <div className="absolute inset-x-0 top-0 flex items-start justify-between p-3">
+                   <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-black/70 backdrop-blur px-2 py-1 rounded-md">
+                      {h.sport?.name ?? "Sports"}
+                   </span>
+
+                   {h.publishedAt && (
+                   <span className="text-[11px] font-medium text-white bg-black/80 backdrop-blur px-2 py-1 rounded-md shadow-md">
+                   {relativeTime(h.publishedAt)}
+                   </span>
+                    )}
+                </div>
                 </div>
 
                 <div className="p-5">
@@ -82,11 +90,7 @@ export default function HighlightsSection() {
                     </p>
                   )}
 
-                  {h.publishedAt && (
-                    <div className="mt-3 text-xs text-muted-foreground">
-                      {relativeTime(h.publishedAt)}
-                    </div>
-                  )}
+                 
                 </div>
               </button>
             );
