@@ -97,9 +97,12 @@ const tweetsQuery = `*[_type=="tweet" && ($slug=="all" || sport->slug.current==$
 
 const highlightsQuery = `*[_type=="highlight" && ($slug=="all" || sport->slug.current==$slug)]
   | order(publishedAt desc)[0...12]{
-    _id, title, description, date, videoSource, youtubeId,
-    "videoFileUrl": videoFile.asset->url,
+    _id, 
+    title, 
+    description, 
+    youtubeId,
     customThumbnail,
+    publishedAt,
     ${sportProj}
   }`;
 
