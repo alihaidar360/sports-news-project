@@ -65,7 +65,7 @@ const sportProj = `"sport": sport->{name, "slug": slug.current}`;
 const sportsQuery = `*[_type=="sportCategory"]|order(coalesce(order, 999) asc){_id, name, "slug": slug.current, order}`;
 
 const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.current==$slug)]
-  | order(coalesce(trendingRank, 1) asc, publishedAt desc)[0...10]{
+  | order(coalesce(trendingRank, 1) asc, publishedAt desc)[0...6]{
   _id,
   title,
   "slug": slug.current,
@@ -107,7 +107,7 @@ const highlightsQuery = `*[_type=="highlight" && ($slug=="all" || sport->slug.cu
   }`;
 
 const matchesQuery = `*[_type=="match" && ($slug=="all" || sport->slug.current==$slug) && dateTime(date) >= dateTime(now()) - 60*60*3]
-  | order(date asc)[0...12]{
+  | order(date asc)[0...10]{
     _id,
     team1,
     team2,

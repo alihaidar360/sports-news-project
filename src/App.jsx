@@ -57,35 +57,19 @@ function SportPage() {
 
 const App = () => {
   return (
-    <Routes>
-  {/* Homepage */}
+   <Routes>
   <Route path="/" element={<HomePage />} />
 
-  {/* Sport pages */}
+  <Route path="/privacy" element={<PrivacyPage />} />
+  <Route path="/contact" element={<ContactPage />} />
+  <Route path="/advertise" element={<AdvertisePage />} />
+  <Route path="/about" element={<AboutPage />} />
+  <Route path="/editorial-policy" element={<EditorialPolicyPage />} />
+  <Route path="/disclaimer" element={<DisclaimerPage />} />
+  <Route path="/terms-and-conditions" element={<TermsPage />} />
+
   <Route path="/:sport" element={<SportPage />} />
-
-  {/* Article pages */}
   <Route path="/:sport/:slug" element={<ArticlePage />} />
-
-
-
-      {/* 1. Homepage — Sabse pehle */}
-      <Route path="/" element={<HomePage />} />
-
-      {/* 2. Static Pages — Inhe hamesha dynamic params se UPAR hona chahiye */}
-      <Route path="/privacy" element={<PrivacyPage />} />
-      <Route path="/contact" element={<ContactPage />} />
-      <Route path="/advertise" element={<AdvertisePage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/editorial-policy" element={<EditorialPolicyPage />} /> 
-      <Route path="/disclaimer" element={<DisclaimerPage />} />
-      <Route path="/terms-and-conditions" element={<TermsPage />} />
-      
-      {/* 3. Dynamic Pages — Yeh sabse NEECHE aayenge taake pehle static pages check ho sakein */}
-      <Route path="/:sport" element={<SportPage />} />
-      <Route path="/:sport/:slug" element={<ArticlePage />} />
-      
-      
 </Routes>
 
   );

@@ -30,6 +30,7 @@ export default function ArticlePage() {
     queryKey: ["article", slug],
     queryFn: () =>
       sanityClient.fetch(articleQuery, { slug }),
+     staleTime: 1000 * 60 * 10,
   });
 
   if (isLoading) {
@@ -57,7 +58,7 @@ export default function ArticlePage() {
     );
   }
 
-  const img = articleImage(article, 1400, 800);
+ const img = articleImage(article, 1200, 675);
 
   return (
     <div className="container-wide py-10">
@@ -92,11 +93,16 @@ export default function ArticlePage() {
         )}
 
         {img && (
-          <img
-            src={img}
-            alt={article.title}
-            className="mt-10 w-full rounded-3xl object-cover"
-          />
+         <img
+          src={img}
+          alt={article.title}
+          width={1200}
+          height={675}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          className="mt-10 w-full rounded-3xl object-cover"
+         />
         )}
 
         <div className="prose prose-invert lg:prose-xl max-w-none mt-12">

@@ -38,7 +38,7 @@ export default function TrendingNews() {
               </div>
             ))
           : list.map((a, i) => {
-              const img = articleImage(a, 800, 500);
+             const img = articleImage(a, 500, 300);
 
               return (
                 <Link
@@ -48,12 +48,15 @@ export default function TrendingNews() {
                 >
                   <div className="relative aspect-[16/10] overflow-hidden bg-surface">
                     {img && (
-                      <img
-                        src={img}
-                        alt={a.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                      />
+                     <img
+                      src={img}
+                      alt={a.title}
+                      loading="lazy"
+                      decoding="async"
+                      width="500"
+                      height="300"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                     />
                     )}
 
                     <span className="absolute top-3 left-3 inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-white bg-black/60 backdrop-blur px-2 py-1 rounded">
