@@ -75,7 +75,7 @@ export default function Hero() {
 
   if (!main) return null;
 
-  const heroSrc = articleImage(main, 1600, 1200) ?? heroFallback;
+ const heroSrc = articleImage(main, 1200, 800)?? heroFallback;
 
   const currentHero =
     sportHeadings[sport] || sportHeadings["all"];
@@ -138,13 +138,16 @@ export default function Hero() {
 
         <div className="lg:col-span-6 fade-in">
           <div className="relative aspect-[4/3] md:aspect-[5/4] overflow-hidden rounded-2xl bg-surface">
-            <img
-              src={heroSrc}
-              alt={main.title}
-              width={1600}
-              height={1200}
-              className="h-full w-full object-cover"
-            />
+           <img
+             src={heroSrc}
+             alt={main.title}
+             width={1600}
+             height={1200}
+             className="h-full w-full object-cover"
+             loading="eager"
+             fetchPriority="high"
+             decoding="async"
+           />
 
             <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
               <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-white/90 bg-accent px-2 py-1 rounded">

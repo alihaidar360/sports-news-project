@@ -65,7 +65,7 @@ const sportProj = `"sport": sport->{name, "slug": slug.current}`;
 const sportsQuery = `*[_type=="sportCategory"]|order(coalesce(order, 999) asc){_id, name, "slug": slug.current, order}`;
 
 const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.current==$slug)]
-  | order(coalesce(trendingRank, 999) asc, publishedAt desc)[0...10]{
+  | order(coalesce(trendingRank, 1) asc, publishedAt desc)[0...10]{
   _id,
   title,
   "slug": slug.current,
@@ -156,7 +156,7 @@ export const matchesQueryOptions = (slug: string) =>
 
 export function articleImage(a: Article, w = 1200, h?: number): string | undefined {
   if (a.image && (a.image as { asset?: unknown })?.asset) {
-    let b = urlFor(a.image).width(w).auto("format").quality(75);
+    let b = urlFor(a.image).width(w).auto("format").quality(65);
     if (h) b = b.height(h).fit("crop");
     return b.url();
   }
@@ -179,7 +179,7 @@ export function tweetAvatar(src?: SanityImage): string | undefined {
 
 export function tweetImage(src?: SanityImage): string | undefined {
   if (src && (src as { asset?: unknown })?.asset) {
-    return urlFor(src).width(900).auto("format").quality(75).url();
+    return urlFor(src).width(900).auto("format").quality(65).url();
   }
   return undefined;
 }
