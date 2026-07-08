@@ -27,14 +27,14 @@ export default function HomePageClient({
 }: Props) {
   return ( 
      <> 
-       {/* <InfoModal />  */}
+       {<InfoModal />} 
        <Navbar sports={sports} currentSport={currentSport} />
-       {/* <Hero articles={articles} currentSport={currentSport} /> 
+       {<Hero articles={articles} currentSport={currentSport} />} 
        <TrendingNews articles={articles} /> 
        <HighlightsSection highlights={highlights} /> 
        <TweetsSection tweets={tweets} /> 
        <UpcomingMatches matches={matches}/> 
-       <Newsletter /> <Footer />  */}
+       <Newsletter /> <Footer />  
     </> 
 );
 }
