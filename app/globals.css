@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================
+   Root Theme
+=========================== */
+
+:root {
+  --radius: 0.5rem;
+
+  /* Light Theme */
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.13 0.01 260);
+
+  --surface: oklch(0.97 0.003 260);
+  --surface-elevated: oklch(1 0 0);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.01 260);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0.01 260);
+
+  --primary: oklch(0.13 0.01 260);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.96 0.004 260);
+  --secondary-foreground: oklch(0.18 0.01 260);
+
+  --muted: oklch(0.95 0.004 260);
+  --muted-foreground: oklch(0.48 0.01 260);
+
+  --accent: oklch(0.62 0.22 25);
+  --accent-foreground: oklch(0.99 0 0);
+
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.92 0.005 260);
+  --input: oklch(0.92 0.005 260);
+  --ring: oklch(0.62 0.22 25);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", "Inter", sans-serif;
+}
+
+/* ===========================
+   Dark Theme
+=========================== */
+
+.dark {
+  --background: oklch(0.10 0.005 260);
+  --foreground: oklch(0.98 0.003 260);
+
+  --surface: oklch(0.14 0.006 260);
+  --surface-elevated: oklch(0.17 0.007 260);
+
+  --card: oklch(0.14 0.006 260);
+  --card-foreground: oklch(0.98 0.003 260);
+
+  --popover: oklch(0.14 0.006 260);
+  --popover-foreground: oklch(0.98 0.003 260);
+
+  --primary: oklch(0.98 0.003 260);
+  --primary-foreground: oklch(0.13 0.01 260);
+
+  --secondary: oklch(0.20 0.008 260);
+  --secondary-foreground: oklch(0.98 0.003 260);
+
+  --muted: oklch(0.18 0.007 260);
+  --muted-foreground: oklch(0.65 0.01 260);
+
+  --accent: oklch(0.65 0.23 25);
+  --accent-foreground: oklch(0.99 0 0);
+
+  --destructive: oklch(0.65 0.23 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.65 0.23 25);
+}
+
+/* ===========================
+   Base
+=========================== */
+
+@layer base {
+
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    font-feature-settings: "ss01","cv11";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  a {
+    text-decoration: none;
+    transition: 0.25s ease;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+}
+
+/* ===========================
+   Components
+=========================== */
+
+@layer components {
+
+  .container-wide {
+    @apply mx-auto w-full max-w-7xl px-5 md:px-8;
+  }
+
+}
+
+/* ===========================
+   Utilities
+=========================== */
+
+@layer utilities {
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .nav-blur {
+    background: rgba(255,255,255,.72);
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+  }
+
+  .dark .nav-blur {
+    background: rgba(17,17,17,.72);
+  }
+
+  .glass {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255,255,255,.65);
+    border: 1px solid rgba(255,255,255,.12);
+  }
+
+  .dark .glass {
+    background: rgba(20,20,20,.55);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+
+  .hover-lift {
+    transition:
+      transform .35s cubic-bezier(.2,.8,.2,1),
+      box-shadow .35s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-3px);
+  }
+
+  .fade-in {
+    animation: fadeIn .45s ease both;
+  }
+
+  .fade-up {
+    animation: fadeUp .55s ease both;
+  }
+
+  .scale-hover {
+    transition: transform .45s ease;
+  }
+
+  .scale-hover:hover {
+    transform: scale(1.03);
+  }
+
+}
+
+/* ===========================
+   Animations
+=========================== */
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+@keyframes fadeUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}

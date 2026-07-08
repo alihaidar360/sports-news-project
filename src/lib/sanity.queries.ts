@@ -1,4 +1,3 @@
-import { queryOptions } from "@tanstack/react-query";
 import { sanityClient, urlFor } from "./sanity";
 
 export type SportRef = { name: string; slug: string };
@@ -13,11 +12,11 @@ export interface Article {
   slug?: { current: string };
   excerpt?: string;
   image?: SanityImage;
-  imageUrl?: string;
   publishedAt?: string;
   featured?: boolean;
   trendingRank?: number;
   sport?: SportRef;
+  content?: unknown[];
 }
 
 export interface Tweet {
@@ -41,10 +40,7 @@ export interface Highlight {
   title: string;
   description?: string;
   date?: string;
-  videoSource?: "youtube" | "upload";
   youtubeId?: string;
-  videoFileUrl?: string;
-  customThumbnail?: SanityImage;
   publishedAt?: string;
   sport?: SportRef;
 }
@@ -60,127 +56,87 @@ export interface Match {
   stadium?: string;
   sport?: SportRef;
 }
+
 const sportProj = `"sport": sport->{name, "slug": slug.current}`;
 
-const sportsQuery = `*[_type=="sportCategory"]|order(coalesce(order, 999) asc){_id, name, "slug": slug.current, order}`;
+export const sportsQuery = `*[_type=="sportCategory"]|order(coalesce(order, 1) asc){_id, name, "slug": slug.current, order}`;
 
-const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.current==$slug)]
-  | order(coalesce(trendingRank, 1) asc, publishedAt desc)[0...6]{
-  _id,
-  title,
-  "slug": slug.current,
-  excerpt,
-  image,
-  imageUrl,
-  featured,
-  publishedAt,
-  trendingRank,
-  ${sportProj}
-  }`;
+export const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.current==$slug)]
+  | order(coalesce(trendingRank, 1) asc, publishedAt desc)[0...9]{
+  _id, title, "slug": slug.current, excerpt, image, content, 
+  featured, publishedAt, trendingRank, ${sportProj}
+}`;
 
-const tweetsQuery = `*[_type=="tweet" && ($slug=="all" || sport->slug.current==$slug)]
-  | order(tweetDate desc)[0...12]{
-    _id,
-    authorName,
-    handle,
-    avatar,
-    content,
-    image,
-    tweetDate,
-    tweetUrl,
-    verified,
-    likes,
-    replies,
-    reposts,
-    ${sportProj}
-  }`;
+export const articleBySlugQuery = `*[_type=="article" && slug.current==$slug][0]{
+  _id, title, "slug": slug.current, excerpt, image, imageUrl,
+  content, publishedAt, trendingRank, ${sportProj}
+}`;
 
-const highlightsQuery = `*[_type=="highlight" && ($slug=="all" || sport->slug.current==$slug)]
-  | order(publishedAt desc)[0...12]{
-    _id, 
-    title, 
-    description, 
-    youtubeId,
-    customThumbnail,
-    publishedAt,
-    ${sportProj}
-  }`;
+export const tweetsQuery = `*[_type=="tweet" && ($slug=="all" || sport->slug.current==$slug)]
+  | order(tweetDate desc)[0...9]{
+  _id, authorName, handle, avatar, content, image,
+  tweetDate, tweetUrl, verified, likes, replies, reposts, ${sportProj}
+}`;
 
-const matchesQuery = `*[_type=="match" && ($slug=="all" || sport->slug.current==$slug) && dateTime(date) >= dateTime(now()) - 60*60*3]
-  | order(date asc)[0...10]{
-    _id,
-    team1,
-    team2,
-    team1Logo,
-    team2Logo,
-    date,
-    tournament,
-    stadium,
-    ${sportProj}
-  }`;
+export const highlightsQuery = `*[_type=="highlight" && ($slug=="all" || sport->slug.current==$slug)]
+  | order(publishedAt desc)[0...9]{
+  _id, title, youtubeId, description, publishedAt, ${sportProj}
+}`;
 
-export const sportsQueryOptions = () =>
-  queryOptions({
-    queryKey: ["sanity", "sports"],
-    queryFn: () => sanityClient.fetch<Sport[]>(sportsQuery),
-    staleTime: 1000 * 60 * 10,
-  });
+export const matchesQuery = `*[_type=="match" && ($slug=="all" || sport->slug.current==$slug) && dateTime(date) >= dateTime(now()) - 60*60*3]
+  | order(date asc)[0...12]{
+  _id, team1, team2, team1Logo, team2Logo, date, tournament, stadium, ${sportProj}
+}`;
 
-export const articlesQueryOptions = (slug: string) =>
-  queryOptions({
-    queryKey: ["sanity", "articles", slug],
-    queryFn: () => sanityClient.fetch<Article[]>(articlesQuery, { slug }),
-    staleTime: 1000 * 60,
-  });
+// ── Data fetching functions (server-side, no React Query needed) ──
+export async function getSports(): Promise<Sport[]> {
+  return sanityClient.fetch(sportsQuery);
+}
 
-export const tweetsQueryOptions = (slug: string) =>
-  queryOptions({
-    queryKey: ["sanity", "tweets", slug],
-    queryFn: () => sanityClient.fetch<Tweet[]>(tweetsQuery, { slug }),
-    staleTime: 1000 * 60,
-  });
+export async function getArticles(slug = "all"): Promise<Article[]> {
+  return sanityClient.fetch(articlesQuery, { slug });
+}
 
-export const highlightsQueryOptions = (slug: string) =>
-  queryOptions({
-    queryKey: ["sanity", "highlights", slug],
-    queryFn: () => sanityClient.fetch<Highlight[]>(highlightsQuery, { slug }),
-    staleTime: 1000 * 60 * 5,
-  });
+export async function getArticleBySlug(slug: string): Promise<Article | null> {
+  return sanityClient.fetch(articleBySlugQuery, { slug });
+}
 
-export const matchesQueryOptions = (slug: string) =>
-  queryOptions({
-    queryKey: ["sanity", "matches", slug],
-    queryFn: () => sanityClient.fetch<Match[]>(matchesQuery, { slug }),
-    staleTime: 1000 * 30,
-  });
+export async function getTweets(slug = "all"): Promise<Tweet[]> {
+  return sanityClient.fetch(tweetsQuery, { slug });
+}
 
+export async function getHighlights(slug = "all"): Promise<Highlight[]> {
+  return sanityClient.fetch(highlightsQuery, { slug });
+}
+
+export async function getMatches(slug = "all"): Promise<Match[]> {
+  return sanityClient.fetch(matchesQuery, { slug });
+}
+
+// ── Helper functions (same as before) ──
 export function articleImage(a: Article, w = 1200, h?: number): string | undefined {
   if (a.image && (a.image as { asset?: unknown })?.asset) {
     let b = urlFor(a.image).width(w).auto("format").quality(65);
     if (h) b = b.height(h).fit("crop");
     return b.url();
   }
-  return a.imageUrl;
 }
 
 export function teamLogo(src: SanityImage, fallback?: string): string | undefined {
-  if (src && (src as { asset?: unknown })?.asset) {
+  if (src && (src as { asset?: unknown })?.asset)
     return urlFor(src).width(80).height(80).fit("crop").url();
-  }
   return fallback;
 }
 
 export function tweetAvatar(src?: SanityImage): string | undefined {
-  if (src && (src as { asset?: unknown })?.asset) {
+  if (src && (src as { asset?: unknown })?.asset)
     return urlFor(src).width(96).height(96).fit("crop").auto("format").url();
-  }
   return undefined;
 }
 
 export function tweetImage(src?: SanityImage): string | undefined {
-  if (src && (src as { asset?: unknown })?.asset) {
+  if (src && (src as { asset?: unknown })?.asset)
     return urlFor(src).width(900).auto("format").quality(65).url();
-  }
   return undefined;
 }
 
@@ -195,9 +151,6 @@ export function extractYouTubeId(input?: string): string | undefined {
 }
 
 export function highlightThumbnail(h: Highlight): string | undefined {
-  if (h.customThumbnail && (h.customThumbnail as { asset?: unknown })?.asset) {
-    return urlFor(h.customThumbnail).width(960).height(540).fit("crop").auto("format").url();
-  }
   const yt = extractYouTubeId(h.youtubeId);
   if (yt) return `https://img.youtube.com/vi/${yt}/hqdefault.jpg`;
   return undefined;

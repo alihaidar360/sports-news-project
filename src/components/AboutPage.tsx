@@ -1,10 +1,11 @@
+"use client";
 
-import EditorialPage from "./EditorialPage";
+import EditorialLayout from "./EditorialLayout";
 
 
 export default function AboutPage() {
   return (
-    <EditorialPage
+    <EditorialLayout
       eyebrow="About"
       title="A reader-first sports newsroom built for speed and trust"
       lede="PZMIR is an independent sports media publication covering breaking sports news, live match updates, video highlights 
@@ -94,6 +95,6 @@ export default function AboutPage() {
           .
         </p>
       </section>
-    </EditorialPage>
+    </EditorialLayout>
   );
 }

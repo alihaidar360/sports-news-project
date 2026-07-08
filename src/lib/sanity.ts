@@ -11,5 +11,3 @@ export const sanityClient = createClient({
 const builder = imageUrlBuilder(sanityClient);
 type SanityImageSource = Parameters<ReturnType<typeof imageUrlBuilder>["image"]>[0];
 export const urlFor = (source: SanityImageSource) => builder.image(source);
-
-

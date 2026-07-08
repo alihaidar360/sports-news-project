@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { X, Zap, Newspaper, PlayCircle, CalendarDays } from "lucide-react";
 

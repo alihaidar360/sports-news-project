@@ -1,20 +1,23 @@
+"use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { Search, Menu, X, Moon, Sun } from "lucide-react";
-import { sportsQueryOptions, type Sport } from "../lib/sanity.queries";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import { useSportFilter } from "../context/SportFilter";
 import { cn } from "../lib/utils";
-
+import type { Sport } from "../lib/sanity.queries";
+import { useRouter } from "next/navigation";
 const ALL: Sport = { _id: "all", name: "All Sports", slug: "all" };
 
-export default function Navbar() {
-  const { sport, setSport } = useSportFilter();
-  const navigate = useNavigate();
+interface NavbarProps {
+  sports: Sport[];
+  currentSport: string;
+}
+
+export default function Navbar({ sports: sports, currentSport }: NavbarProps) {
+  const {sport, setSport } = useSportFilter();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
-  const { data } = useQuery(sportsQueryOptions());
-  const sports = [ALL, ...(data ?? [])];
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -34,9 +37,9 @@ export default function Navbar() {
   setSport(s);
 
   if (s === "all") {
-    navigate("/");
+    router.push("/");
   } else {
-    navigate(`/${s}`);
+    router.push(`/${s}`);
   }
 
   setOpen(false);
@@ -45,7 +48,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 nav-blur border-b border-border">
       <div className="container-wide flex h-16 items-center gap-6">
-        <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => setSport("all")}>
+        <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setSport("all")} prefetch={false}>
           <span className="inline-block h-2 w-2 rounded-full bg-accent" />
           <span className="font-display text-lg font-extrabold tracking-tight">PZMIR</span>
           <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden sm:inline">
@@ -107,11 +110,11 @@ export default function Navbar() {
         <div className="lg:hidden border-t border-border bg-background">
           <div className="container-wide py-3 grid grid-cols-2 gap-1">
             {sports.map((s) => {
-              const active = sport === s.slug;
+              const active = currentSport === s.slug;
               return (
                 <button
                   key={s.slug}
-                  onClick={() => pick(s.slug)}
+                  onClick={() => setSport(s.slug)}
                   className={cn(
                     "text-left px-3 py-2.5 rounded-md text-sm font-medium",
                     active

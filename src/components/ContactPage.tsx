@@ -1,5 +1,6 @@
+"use client";
 import { useMemo, useState } from "react";
-import  EditorialPage from "../components//EditorialPage";
+import  EditorialLayout from "./EditorialLayout";
 
 const TOPICS = [
   { value: "editorial", label: "Editorial tip / news story", email: "pzmirsports@gmail.com" },
@@ -23,7 +24,7 @@ export default function ContactPage() {
   }, [topic, name, email, message]);
 
   return (
-    <EditorialPage
+    <EditorialLayout
       eyebrow="Contact"
       title="Get in touch with the PZMIR team"
       lede="Whether you have a tip on a breaking sports story, a correction, an advertising brief or a partnership idea — we'd love to hear from you."
@@ -153,6 +154,6 @@ export default function ContactPage() {
           <li>General support: within three business days</li>
         </ul>
       </section>
-    </EditorialPage>
+    </EditorialLayout>
   );
 }

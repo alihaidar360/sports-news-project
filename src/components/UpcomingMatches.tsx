@@ -1,12 +1,9 @@
+"use client";
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { MapPin, Trophy } from "lucide-react";
-import { useSportFilter } from "../context/SportFilter";
 import {
-  matchesQueryOptions,
   teamLogo,
   type Match,
-  type SanityImage,
 } from "../lib/sanity.queries";
 import { SectionHeader, EmptyState } from "./TrendingNews";
 
@@ -28,30 +25,23 @@ function MatchRow({ match }: { match: Match }) {
   const c = useCountdown(match.date);
   const date = new Date(match.date);
   const dateStr = date.toLocaleDateString(undefined, {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
+    weekday: "short", month: "short", day: "numeric",
   });
   const timeStr = date.toLocaleTimeString(undefined, {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: "2-digit", minute: "2-digit",
   });
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-5 rounded-2xl border border-border bg-card hover:border-foreground/20 transition">
       <div className="md:col-span-2">
-        <div className="text-xs uppercase tracking-wider text-muted-foreground">
-          {dateStr}
-        </div>
+        <div className="text-xs uppercase tracking-wider text-muted-foreground">{dateStr}</div>
         <div className="text-2xl font-display font-bold tracking-tight">{timeStr}</div>
       </div>
 
       <div className="md:col-span-5 flex items-center gap-4">
-       <Team logo={teamLogo(match.team1Logo)} name={match.team1} />
-
+        <Team logo={teamLogo(match.team1Logo)} name={match.team1} />
         <span className="text-sm font-semibold text-muted-foreground px-2">vs</span>
-         <Team logo={teamLogo(match.team2Logo)} name={match.team2} />
-       
+        <Team logo={teamLogo(match.team2Logo)} name={match.team2} />
       </div>
 
       <div className="md:col-span-3 text-sm text-muted-foreground space-y-1">
@@ -92,10 +82,12 @@ function Team({ logo, name }: { logo?: string; name: string }) {
   );
 }
 
-export default function UpcomingMatches() {
-  const { sport } = useSportFilter();
-  const { data, isLoading } = useQuery(matchesQueryOptions(sport));
-  const list = data ?? [];
+interface Props {
+  matches: Match[];
+}
+
+export default function UpcomingMatches({ matches }: Props) {
+  const list = matches ?? [];
 
   return (
     <section className="container-wide mt-24">
@@ -108,7 +100,7 @@ export default function UpcomingMatches() {
         {list.map((m) => (
           <MatchRow key={m._id} match={m} />
         ))}
-        {!isLoading && list.length === 0 && (
+        {list.length === 0 && (
           <div className="grid">
             <EmptyState />
           </div>
@@ -117,6 +109,3 @@ export default function UpcomingMatches() {
     </section>
   );
 }
-
-// Re-export for any external consumers
-export type { SanityImage };

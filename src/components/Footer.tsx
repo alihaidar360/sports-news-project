@@ -1,5 +1,5 @@
-// src/components/Footer.tsx
-import { Link } from "react-router-dom";
+"use client";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -18,25 +18,25 @@ export default function Footer() {
 
         {/* Right: Page links */}
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-          <Link to="/about" className="text-white/80 hover:text-white transition-colors">
+          <Link href="/about" className="text-white/80 hover:text-white transition-colors">
             About
           </Link>
-          <Link to="/editorial-policy" className="text-white/80 hover:text-white transition-colors">
-            Editorial
+          <Link href="/editorial-policy" className="text-white/80 hover:text-white transition-colors">
+            Editorial Policy
           </Link>
-          <Link to="/advertise" className="text-white/80 hover:text-white transition-colors">
+          <Link href="/advertise" className="text-white/80 hover:text-white transition-colors">
             Advertise
           </Link>
-          <Link to="/privacy" className="text-white/80 hover:text-white transition-colors">
+          <Link href="/privacy" className="text-white/80 hover:text-white transition-colors">
             Privacy
           </Link>
-          <Link to="/contact" className="text-white/80 hover:text-white transition-colors">
+          <Link href="/contact" className="text-white/80 hover:text-white transition-colors">
             Contact
           </Link> 
-          <Link to="/disclaimer" className="text-white/80 hover:text-white transition-colors">
+          <Link href="/disclaimer" className="text-white/80 hover:text-white transition-colors">
             Disclaimer
           </Link>
-           <Link to="/terms-and-conditions" className="text-white/80 hover:text-white transition-colors">
+           <Link href="/terms-and-conditions" className="text-white/80 hover:text-white transition-colors">
             Terms & Conditions
           </Link>
         </nav>

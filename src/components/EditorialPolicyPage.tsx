@@ -1,8 +1,9 @@
-import EditorialPage from "./EditorialPage";
+"use client";
+import EditorialLayout from "./EditorialLayout";
 
 export default function EditorialPolicyPage() {
   return (
-    <EditorialPage
+    <EditorialLayout  
       eyebrow="Editorial Policy"
       title="How PZMIR reports, verifies and corrects sports news"
       lede="Sports journalism is only useful when it is accurate. This is the editorial standard every PZMIR writer and editor operates under, every day."
@@ -84,6 +85,6 @@ export default function EditorialPolicyPage() {
           there is a clear public-interest justification.
         </p>
       </section>
-    </EditorialPage>
+    </EditorialLayout>
   );
 }

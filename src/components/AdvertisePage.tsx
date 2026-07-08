@@ -1,12 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import EditorialPage, { breadcrumbJsonLd } from "./EditorialPage";
-
-
-
+"use client";
+import EditorialLayout, { breadcrumbJsonLd } from "./EditorialLayout";
 
 export default function AdvertisePage() {
   return (
-    <EditorialPage
+    <EditorialLayout
       eyebrow="Advertise"
       title="Reach a global, high-intent sports audience"
       lede="PZMIR puts your brand in front of fans who actively follow breaking sports news, match highlights and live updates across every major sport."
@@ -98,6 +95,6 @@ export default function AdvertisePage() {
           enquiries within two business days.
         </p>
       </section>
-    </EditorialPage>
+    </EditorialLayout>
   );
 }

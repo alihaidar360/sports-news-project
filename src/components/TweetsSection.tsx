@@ -1,15 +1,14 @@
-import { useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useSportFilter } from "../context/SportFilter";
+"use client";
 import {
-  tweetsQueryOptions,
+  tweetsQuery,
   tweetAvatar,
   tweetImage,
   relativeTime,
+  type Tweet,
 } from "../lib/sanity.queries";
 import { SectionHeader, EmptyState } from "./TrendingNews";
 
-function TweetCard({ t }: { t: any }) {
+function TweetCard({ t }: { t: Tweet }) {
   const avatar = tweetAvatar(t.avatar);
   const image = tweetImage(t.image);
   const when = relativeTime(t.tweetDate);
@@ -23,14 +22,11 @@ function TweetCard({ t }: { t: any }) {
             <img src={avatar} alt={t.authorName} className="h-full w-full object-cover" loading="lazy" />
           ) : null}
         </div>
-
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5 leading-tight">
             <h3 className="font-semibold text-foreground truncate">{t.authorName}</h3>
             {t.verified ? (
-              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-sky-500 text-white text-[11px]">
-                ✓
-              </span>
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-sky-500 text-white text-[11px]">✓</span>
             ) : null}
           </div>
           <p className="text-sm text-muted-foreground truncate">{t.handle}</p>
@@ -40,23 +36,15 @@ function TweetCard({ t }: { t: any }) {
 
       {image ? (
         <div className="mt-4 overflow-hidden rounded-2xl border border-border">
-          <img
-            src={image}
-            alt="Tweet media"
-            className="w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-            loading="lazy"
-          />
+          <img src={image} alt="Tweet media" className="w-full object-cover transition duration-500 group-hover:scale-[1.02]" loading="lazy" />
         </div>
       ) : null}
-
-    
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
         <div>
           <span>{when}</span>
           {date ? <span className="ml-2">• {date}</span> : null}
         </div>
-
         <a
           href={t.tweetUrl}
           target="_blank"
@@ -76,10 +64,12 @@ function TweetCard({ t }: { t: any }) {
   );
 }
 
-export default function TweetsSection() {
-  const { sport } = useSportFilter();
-  const { data, isLoading } = useQuery(tweetsQueryOptions(sport));
-  const list = useMemo(() => data ?? [], [data]);
+interface Props {
+  tweets: Tweet[];
+}
+
+export default function TweetsSection({ tweets }: Props) {
+  const list = tweets ?? [];
 
   return (
     <section className="container-wide mt-24">
@@ -88,14 +78,13 @@ export default function TweetsSection() {
         title="What people are posting"
         sub="Curated sports tweets, rendered as fast custom cards for a smoother experience."
       />
-
       <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {list.map((t, i) => (
           <div key={t._id} style={{ animationDelay: `${i * 60}ms` }}>
             <TweetCard t={t} />
           </div>
         ))}
-        {!isLoading && list.length === 0 && <EmptyState />}
+        {list.length === 0 && <EmptyState />}
       </div>
     </section>
   );

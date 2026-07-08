@@ -1,9 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import  EditorialPage from "./EditorialPage";
+"use client";
+import  EditorialLayout from "./EditorialLayout";
 
 export default function DisclaimerPage() {
   return (
-    <EditorialPage
+    <EditorialLayout
       eyebrow="Legal"
       title="Disclaimer"
       lede="This disclaimer governs your use of the PZMIR Sports website and outlines the limitations of liability for the content we publish."
@@ -103,6 +103,6 @@ export default function DisclaimerPage() {
           .
         </p>
       </section>
-    </EditorialPage>
+    </EditorialLayout>
   );
 }

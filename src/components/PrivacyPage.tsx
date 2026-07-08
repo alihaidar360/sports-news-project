@@ -1,9 +1,9 @@
-import EditorialPage, { breadcrumbJsonLd } from "./EditorialPage";
-
+"use client";
+import EditorialLayout, { breadcrumbJsonLd } from "./EditorialLayout";
 
 export default function PrivacyPage() {
   return (
-    <EditorialPage
+    <EditorialLayout
       eyebrow="Privacy"
       title="Privacy policy"
       lede="This policy explains what data PZMIR collects when you read, subscribe or interact with our site — and the choices you have about that data."
@@ -77,6 +77,6 @@ export default function PrivacyPage() {
           and we will respond within 30 days.
         </p>
       </section>
-    </EditorialPage>
+    </EditorialLayout>
   );
 }
