@@ -1,7 +1,16 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js",
   "/about/page": "app/about/page.js",
+  "/advertise/page": "app/advertise/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/disclaimer/page": "app/disclaimer/page.js",
+  "/editorial-policy/page": "app/editorial-policy/page.js",
+  "/editorial/page": "app/editorial/page.js",
+  "/privacy/page": "app/privacy/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/termsAndCondition/page": "app/termsAndCondition/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/page": "app/page.js",
   "/[sport]/[slug]/page": "app/[sport]/[slug]/page.js",
   "/[sport]/page": "app/[sport]/page.js"
 }
