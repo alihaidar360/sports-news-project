@@ -62,7 +62,7 @@ const sportProj = `"sport": sport->{name, "slug": slug.current}`;
 export const sportsQuery = `*[_type=="sportCategory"]|order(coalesce(order, 1) asc){_id, name, "slug": slug.current, order}`;
 
 export const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.current==$slug)]
-  | order(coalesce(trendingRank, 1) asc, publishedAt desc)[0...9]{
+  | order(coalesce(trendingRank, 1) asc, publishedAt desc)[0...12]{
   _id, title, "slug": slug.current, excerpt, image, content, 
   featured, publishedAt, trendingRank, ${sportProj}
 }`;
@@ -73,7 +73,7 @@ export const articleBySlugQuery = `*[_type=="article" && slug.current==$slug][0]
 }`;
 
 export const tweetsQuery = `*[_type=="tweet" && ($slug=="all" || sport->slug.current==$slug)]
-  | order(tweetDate desc)[0...9]{
+  | order(tweetDate desc)[0...12]{
   _id, authorName, handle, avatar, content, image,
   tweetDate, tweetUrl, verified, likes, replies, reposts, ${sportProj}
 }`;
@@ -84,7 +84,7 @@ export const highlightsQuery = `*[_type=="highlight" && ($slug=="all" || sport->
 }`;
 
 export const matchesQuery = `*[_type=="match" && ($slug=="all" || sport->slug.current==$slug) && dateTime(date) >= dateTime(now()) - 60*60*3]
-  | order(date asc)[0...12]{
+  | order(date asc)[0...15]{
   _id, team1, team2, team1Logo, team2Logo, date, tournament, stadium, ${sportProj}
 }`;
 

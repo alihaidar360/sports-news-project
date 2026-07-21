@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 import type { Metadata } from "next";
 import { SportFilterProvider } from "../src/context/SportFilter";
 
@@ -29,6 +30,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          async
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4979553169838229"
+          crossOrigin="anonymous"
+        />
+      </head>
+
       <body>
         <SportFilterProvider>
           {children}
