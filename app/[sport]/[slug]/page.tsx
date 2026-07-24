@@ -18,19 +18,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const image = articleImage(article, 1200, 630);
 
   return {
-    title: article.title,
-    description: article.excerpt,
+    title: article.seoTitle || article.title,
+    description: article.seoDescription || article.excerpt,
     openGraph: {
-      title: article.title,
-      description: article.excerpt,
+      title: article.seoTitle || article.title,
+      description: article.seoDescription || article.excerpt,
       type: "article",
       publishedTime: article.publishedAt,
       images: image ? [{ url: image, width: 1200, height: 630 }] : [],
     },
+    alternates: {
+    canonical: `https://sports-news-project.vercel.app/${params.sport}/${params.slug}`,
+    },
     twitter: {
       card: "summary_large_image",
-      title: article.title,
-      description: article.excerpt,
+      title: article.seoTitle || article.title,
+      description: article.seoDescription || article.excerpt,
       images: image ? [image] : [],
     },
   };

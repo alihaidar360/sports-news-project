@@ -9,16 +9,28 @@ export type SanityFile = { asset?: { _ref: string; url?: string } } | null | und
 export interface Article {
   _id: string;
   title: string;
-  slug?: { current: string };
+  slug?: string;
   excerpt?: string;
+
   image?: SanityImage;
+
   publishedAt?: string;
   featured?: boolean;
   trendingRank?: number;
-  sport?: SportRef;
-  content?: unknown[];
-}
 
+  sport?: SportRef;
+
+  content?: unknown[];
+
+  team_or_player_names?: string[];
+  unsplash_query?: string;
+
+  seoTitle?: string;
+  seoDescription?: string;
+  focusKeyword?: string;
+
+  readingTime?: number;
+}
 export interface Tweet {
   _id: string;
   authorName: string;
@@ -62,14 +74,51 @@ const sportProj = `"sport": sport->{name, "slug": slug.current}`;
 export const sportsQuery = `*[_type=="sportCategory"]|order(coalesce(order, 1) asc){_id, name, "slug": slug.current, order}`;
 
 export const articlesQuery = `*[_type=="article" && ($slug=="all" || sport->slug.current==$slug)]
-  | order(coalesce(trendingRank, 1) asc, publishedAt desc)[0...12]{
-  _id, title, "slug": slug.current, excerpt, image, content, 
-  featured, publishedAt, trendingRank, ${sportProj}
-}`;
+| order(coalesce(trendingRank,999) asc, publishedAt desc)[0...12]{
+  _id,
+  title,
+  "slug": slug.current,
+  excerpt,
+  image,
+  content,
+  featured,
+  publishedAt,
+  trendingRank,
 
+  team_or_player_names,
+  unsplash_query,
+
+  seoTitle,
+  seoDescription,
+  focusKeyword,
+
+  readingTime,
+
+  ${sportProj}
+}`;
 export const articleBySlugQuery = `*[_type=="article" && slug.current==$slug][0]{
-  _id, title, "slug": slug.current, excerpt, image, imageUrl,
-  content, publishedAt, trendingRank, ${sportProj}
+  _id,
+  title,
+  "slug": slug.current,
+  excerpt,
+
+  image,
+
+  content,
+
+  publishedAt,
+  trendingRank,
+
+  team_or_player_names,
+  unsplash_query,
+
+  seoTitle,
+  seoDescription,
+  focusKeyword,
+
+  readingTime,
+
+  ${sportProj}
 }`;
 
 export const tweetsQuery = `*[_type=="tweet" && ($slug=="all" || sport->slug.current==$slug)]
